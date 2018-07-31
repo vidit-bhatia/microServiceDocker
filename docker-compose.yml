@@ -1,8 +1,8 @@
-version: '3'
+version: '3.7'
 
 services:
   awesome:
-    build: ./app1
+    image: deploymentstrategy_awesome:latest
     ports:
      - 8080
     environment:
@@ -10,11 +10,10 @@ services:
     networks:
      - web
     deploy:
-     resources:
-       limits:
-         cpus: '0.40'
-         memory:  256M
-
+      resources:
+        limits:
+          cpus: '0.40'
+          memory: 256M
   proxy:
     image: haproxy:1.8
     depends_on:
@@ -30,10 +29,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.40'
-          memory:  256M
+          cpus: '0.20'
+          memory: 256M
   awesome2:
-    build: ./app2
+    image: deploymentstrategy_awesome2:latest
     ports:
      - 10010
     environment:
@@ -41,11 +40,11 @@ services:
     networks:
      - web
     deploy:
-    resources:
-      limits:
-        cpus: '0.40'
-        memory:  256M
+      resources:
+        limits:
+          cpus: '0.40'
+          memory: 256M
 
 networks:
   web:
-    driver: bridge
+    driver: overlay
