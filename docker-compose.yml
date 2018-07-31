@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  awesome:
+   build: ./app1
+   ports:
+     - 8080
+   environment:
+     - SERVICE_PORTS=8080
+   networks:
+     - web
+
+  proxy:
+    image: haproxy:1.8
+    depends_on:
+      - awesome
+      - awesome2
+    volumes:
+      - ./usr/local/etc/haproxy:/usr/local/etc/haproxy
+    ports:
+      - 80:80
+      - 70:70
+    networks:
+      - web
+  awesome2:
+     build: ./app2
+     ports:
+       - 10010
+     environment:
+       - SERVICE_PORTS=10010
+     networks:
+       - web
+
+networks:
+  web:
+    driver: bridge
