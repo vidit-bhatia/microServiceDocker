@@ -1,6 +1,16 @@
-var http = require('http');
-var os = require('os');
-http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end(`<h1>I'm ${os.hostname()} service2</h1>`);
-}).listen(10010);
+const express = require('express');
+const app = express();
+const port = 10010;
+const os = require('os');
+
+app.get('/', (request, response) => {
+  response.send('Hello from Express!'+os.hostname())
+});
+
+app.listen(port, (err) => {
+  if (err) {
+    return console.log('something bad happened', err)
+  }
+  
+  console.log(`server is listening on ${port}`)
+});

@@ -2,6 +2,7 @@ version: '3.7'
 
 services:
   awesome:
+    #build: ./app1
     image: deploymentstrategy_awesome:latest
     ports:
      - 8080
@@ -32,6 +33,7 @@ services:
           cpus: '0.20'
           memory: 256M
   awesome2:
+    #build: ./app2
     image: deploymentstrategy_awesome2:latest
     ports:
      - 10010
