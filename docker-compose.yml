@@ -9,6 +9,11 @@ services:
      - SERVICE_PORTS=8080
    networks:
      - web
+   deploy:
+     resources:
+       limits:
+         cpus: '0.40'
+         memory:  256M
 
   proxy:
     image: haproxy:1.8
@@ -22,6 +27,11 @@ services:
       - 70:70
     networks:
       - web
+    deploy:
+      resources:
+        limits:
+          cpus: '0.40'
+          memory:  256M
   awesome2:
      build: ./app2
      ports:
@@ -30,6 +40,11 @@ services:
        - SERVICE_PORTS=10010
      networks:
        - web
+    deploy:
+      resources:
+        limits:
+          cpus: '0.40'
+          memory:  256M
 
 networks:
   web:
