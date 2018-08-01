@@ -13,13 +13,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.40'
           memory: 256M
   proxy:
     image: haproxy:1.8
     depends_on:
       - awesome
-      - awesome2
     volumes:
       - ./usr/local/etc/haproxy:/usr/local/etc/haproxy
     ports:
@@ -30,21 +28,6 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.20'
-          memory: 256M
-  awesome2:
-    #build: ./app2
-    image: deploymentstrategy_awesome2:latest
-    ports:
-     - 10010
-    environment:
-     - SERVICE_PORTS=10010
-    networks:
-     - web
-    deploy:
-      resources:
-        limits:
-          cpus: '0.40'
           memory: 256M
 
 networks:
